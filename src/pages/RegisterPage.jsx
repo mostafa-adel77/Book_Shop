@@ -5,10 +5,17 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {domain} from "../store"
+import { domain } from "../store";
 import HeroSectionHome from "../components/HeroSectionHome";
+import { useEffect } from "react";
 export default function RegisterPage() {
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, []);
   const url = domain + "/register";
   const handleRegister = (values) => {
     let dataSend = {
@@ -49,7 +56,7 @@ export default function RegisterPage() {
 
   return (
     <>
-    <HeroSectionHome />
+      <HeroSectionHome />
       <section className="bg-creamy flex flex-col items-center">
         <div className="container flex justify-center py-15">
           <div className="w-full flex flex-col gap-10 md:w-xl p-3">

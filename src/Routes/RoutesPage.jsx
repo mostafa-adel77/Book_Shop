@@ -11,6 +11,7 @@ import ForgetPassword from "../pages/ForgetPassword";
 import ResetPassword from "../pages/ResetPassword";
 import AddCodePage from "../pages/AddCodePage";
 import ProfilePage from "../pages/ProfilePage";
+import ProductDetails from "../components/ProductDetails";
 
 export default function RoutesPage() {
   return (
@@ -19,6 +20,7 @@ export default function RoutesPage() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="books" element={<BooksPage />} />
+          <Route path="productdetails" element={<ProductDetails />} />
           <Route path="aboutus" element={<AboutUsPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />

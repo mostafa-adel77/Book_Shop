@@ -14,9 +14,6 @@ export default function MainLayout() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/");
-    }
     let url = domain + "/profile";
     axios
       .get(url, {

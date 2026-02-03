@@ -5,9 +5,17 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { domain } from "../store";
 import HeroSectionHome from "../components/HeroSectionHome";
+import { useEffect } from "react";
 
 export default function ForgetPassword() {
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+  
   const validationSchema = Yup.object({
     email: Yup.string()
       .required("Email is required")
@@ -30,7 +38,7 @@ export default function ForgetPassword() {
   };
   return (
     <>
-    <HeroSectionHome />
+      <HeroSectionHome />
       <section className="w-full flex flex-col items-center bg-creamy">
         <div className="container flex justify-center">
           <div className="w-xl flex flex-col items-center py-15 gap-10 px-3">
@@ -66,7 +74,6 @@ export default function ForgetPassword() {
                   type="submit"
                   className="w-full px-4 py-3 bg-move rounded-xl text-white shadow-2xl hover:cursor-pointer"
                 >
-                  
                   Send reset code
                 </button>
               </Form>

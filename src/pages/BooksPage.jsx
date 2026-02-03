@@ -3,29 +3,60 @@ import filter from "../assets/images/settings-sliders (1) 1.png";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaMicrophone, FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
-
+import imgcard1 from "../assets/images/imgcard1.png";
+import imgreviewcard1 from "../assets/images/reviewCard5.png";
+import CardBooks from "../components/CardBooks";
 export default function BooksPage() {
+  const [activeIndex, setActiveIndex] = useState(null);
   const [SearchValue, setSearchValue] = useState("");
   const [category] = useState([
-    { name: "technology" },
-    { name: "books" },
-    { name: "foods" },
+    { name: "Business" },
+    { name: "Kids" },
+    { name: "Art" },
+    { name: "History" },
+    { name: "Romance" },
+    { name: "Fantasy" },
+    { name: "Self Help" },
+    { name: "Cooking" },
+    { name: "Sports" },
+  ]);
+  const [publisher] = useState([
+    { name: "Paulo coelo" },
+    { name: "Jane Austen" },
+    { name: "Charles Dickens" },
+    { name: "Mark Twain" },
+    { name: "Virginia Woolf " },
+    { name: "Leo Tolstoy" },
+    { name: "Fyodor Dostoevsky" },
+    { name: "Haruki Murakami" },
+    { name: "Gabriel Márquez" },
+    { name: "Chinua Achebe" },
+  ]);
+  const [year] = useState([
+    { year: 2024 },
+    { year: 2023 },
+    { year: 2022 },
+    { year: 2021 },
+    { year: 2020 },
+    { year: 2019 },
+    { year: 2018 },
+    { year: 2017 },
+    { year: 2016 },
+    { year: 2015 },
+  ]);
+  const [products, setProducts] = useState([
+    {
+      img: `${imgcard1}`,
+      name: "Rich Dad And Poor Dad",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et ultricies est. Aliquam in justo varius, sagittis neque ut, malesuada leo. Aliquam in justo varius, sagittis neque ut, malesuada leo.",
+      author: "Robert T. Kiyosaki",
+      imgreview: `${imgreviewcard1}`,
+      year: 1997,
+      price: 40,
+      discount: "25% Discount code: Ne212",
+    },
   ]);
 
-  const [product, setProduct] = useState([
-    { name: "iphone 12", price: 1000, relation:"technology" },
-    { name: "oppo", price: 1200, relation:"technology" },
-    { name: "samsung", price: 1500, relation:"technology" },
-    { name: "Labtop", price: 30000, relation:"technology" },
-    { name: "camera", price: 10000, relation:"technology" },
-    { name: "TV", price: 20000, relation:"technology" },
-    { name: "math", price: 900, relation:"books" },
-    { name: "history", price: 900, relation:"books" },
-    { name: "scince", price: 900, relation:"books" },
-    { name: "English", price: 900, relation:"books" },
-    { name: "pizza", price: 400, relation:"foods" },
-    { name: "burger", price: 500, relation:"foods" },
-  ]);
   const [view, setView] = useState(category);
 
   useEffect(() => {
@@ -42,31 +73,76 @@ export default function BooksPage() {
       <div className="w-full flex justify-center bg-creamy">
         <div className="container w-full flex flex-col lg:flex-row gap-6 py-10 px-4">
           {/* Filter */}
-          <div className="w-full lg:w-1/4 flex flex-col gap-8 text-black">
-            <div className="flex items-center gap-3">
-              <img width={24} src={filter} alt="" />
-              <h1 className="text-xl font-bold">Filter</h1>
+          <div className="flex flex-col gap-6">
+            <div className="w-full lg:w-70 flex flex-col gap-8 text-black">
+              <div className="flex items-center gap-3">
+                <img width={24} src={filter} alt="" />
+                <h1 className="text-xl font-bold">Filter</h1>
+              </div>
+
+              <div className="bg-white rounded-2xl p-4">
+                <details className="collapse flex flex-col">
+                  <summary className="collapse-title flex justify-between items-center">
+                    <h1 className="font-semibold text-move">Categories</h1>
+                    <IoMdArrowDropdown className="text-black text-2xl" />
+                  </summary>
+
+                  <div className="collapse-content text-sm flex flex-col gap-4">
+                    {view.map((el, index) => (
+                      <label
+                        key={index}
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
+                        <input type="checkbox" className="w-4 h-4" />
+                        <h1>{el.name}</h1>
+                      </label>
+                    ))}
+                  </div>
+                </details>
+              </div>
             </div>
+            <div className="w-full lg:w-70 flex flex-col gap-8 text-black">
+              <div className="bg-white rounded-2xl p-4">
+                <details className="collapse flex flex-col">
+                  <summary className="collapse-title flex justify-between items-center">
+                    <h1 className="font-semibold text-move">Publisher</h1>
+                    <IoMdArrowDropdown className="text-black text-2xl" />
+                  </summary>
 
-            <div className="bg-white rounded-2xl p-4">
-              <details className="collapse flex flex-col">
-                <summary className="collapse-title flex justify-between items-center">
-                  <h1 className="font-semibold text-move">Categories</h1>
-                  <IoMdArrowDropdown className="text-black text-2xl" />
-                </summary>
-
-                <div className="collapse-content text-sm flex flex-col gap-4">
-                  {view.map((el, index) => (
-                    <label
-                      key={index}
-                      className="flex items-center gap-3 cursor-pointer"
-                    >
-                      <input type="checkbox" className="w-4 h-4" />
-                      <h1>{el.name}</h1>
-                    </label>
-                  ))}
-                </div>
-              </details>
+                  <div className="collapse-content text-sm flex flex-col gap-4">
+                    {publisher.map((el, index) => (
+                      <label
+                        key={index}
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
+                        <input type="checkbox" className="w-4 h-4" />
+                        <h1>{el.name}</h1>
+                      </label>
+                    ))}
+                  </div>
+                </details>
+              </div>
+            </div>
+            <div className="w-full lg:w-70 flex flex-col gap-8 text-black">
+              <div className="bg-white rounded-2xl p-4">
+                <details className="collapse flex flex-col">
+                  <summary className="collapse-title flex justify-between items-center">
+                    <h1 className="font-semibold text-move">Year</h1>
+                    <IoMdArrowDropdown className="text-black text-2xl" />
+                  </summary>
+                  <div className="collapse-content text-sm flex flex-col gap-4">
+                    {year.map((el, index) => (
+                      <label
+                        key={index}
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
+                        <input type="checkbox" className="w-4 h-4" />
+                        <h1>{el.year}</h1>
+                      </label>
+                    ))}
+                  </div>
+                </details>
+              </div>
             </div>
           </div>
 
@@ -125,30 +201,37 @@ export default function BooksPage() {
               {category.map((el, index) => (
                 <button
                   key={index}
-                  className="w-30 p-4 bg-move text-white font-bold rounded-lg cursor-pointer"
+                  onClick={() => setActiveIndex(index)}
+                  className={`w-20 px-1 py-2 font-normal rounded-lg cursor-pointer ${activeIndex == index ? "bg-move text-white" : "bg-creamy border border-gray-400 text-black"}`}
                 >
                   {el.name}
                 </button>
               ))}
             </div>
-            <div className="flex flex-wrap gap-5">
-              {product.map((el, index) => (
-                <div key={index} className="card w-50 shadow-sm text-black">
-                  <figure>
-                    <img
-                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                      alt="Shoes"
-                    />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="card-title">{el.name}</h2>
-                    <p>$ {el.price}</p>
-                    <div className="card-actions justify-end">
-                      <button className="btn btn-primary">{el.relation}</button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+
+            <div className="w-full flex flex-col gap-10">
+              <div className="flex gap-5">
+                {products.map((el, index) => (
+                  <CardBooks key={index} el={el} />
+                ))}
+              </div>
+              <div className="flex gap-5">
+                {products.map((el, index) => (
+                  <CardBooks key={index} el={el} />
+                ))}
+              </div>
+              <div className="flex gap-5">
+                {products.map((el, index) => (
+                  <CardBooks key={index} el={el} />
+                ))}
+              </div>
+            </div>
+
+            <div className="join flex justify-center gap-3 py-8">
+              <button className="join-item btn btn-active bg-move text-white border-move">1</button>
+              <button className="join-item btn bg-white text-black">2</button>
+              <button className="join-item btn bg-white text-black">3</button>
+              <button className="join-item btn bg-white text-black">4</button>
             </div>
           </div>
         </div>

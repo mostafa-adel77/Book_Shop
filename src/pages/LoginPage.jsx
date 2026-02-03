@@ -7,11 +7,18 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { domain } from "../store";
 import HeroSectionHome from "../components/HeroSectionHome";
+import { useEffect } from "react";
 
 export default function LoginPage() {
   const { setUserData } = useOutletContext();
-
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+
   const url = domain + "/login";
   const values = {
     email: "",
