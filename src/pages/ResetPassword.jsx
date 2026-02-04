@@ -36,7 +36,6 @@ export default function ResetPassword() {
     password: "",
     password_confirmation: "",
     ischecked: false,
-    otp: "",
   };
   const url = domain + "/reset-password";
   const handleReset = (values) => {
@@ -44,7 +43,6 @@ export default function ResetPassword() {
       email: values.email,
       password: values.password,
       password_confirmation: values.password_confirmation,
-      otp: values.otp,
     };
     axios
       .post(url, dataSend)
@@ -116,20 +114,6 @@ export default function ResetPassword() {
                   />
                   <ErrorMessage
                     name="password_confirmation"
-                    component={"p"}
-                    className="text-red-400 "
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h1 className="font-semibold text-[18px]">Otp</h1>
-                  <Field
-                    name="otp"
-                    type="text"
-                    placeholder="Enter otp"
-                    className="w-full p-6 input shadow-2 rounded-lg border border-[#FFFFFF] shadow-2xl bg-[#FFFFFF]"
-                  />
-                  <ErrorMessage
-                    name="otp"
                     component={"p"}
                     className="text-red-400 "
                   />

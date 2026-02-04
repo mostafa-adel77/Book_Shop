@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaRegHeart } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
-import johnImg from "../assets/images/johnImg.png";
+import johnImg from "../assets/images/johnImage2.jpg";
 import Navbar from "./Navbar";
 
 export default function Header({ userData }) {
@@ -26,15 +26,14 @@ export default function Header({ userData }) {
               />
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               <img
                 onClick={() => navigate("/profile")}
-                className="object-contain hover:cursor-pointer"
-                width={40}
-                height={40}
+                className="w-10 h-10 object-cover rounded-full cursor-pointer"
                 src={johnImg}
                 alt="User"
               />
+
               <div className="flex flex-col gap-1">
                 <h1 className="text-xl font-semibold">
                   {userData?.first_name} {userData?.last_name}

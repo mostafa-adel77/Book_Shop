@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import imgcard1 from "../assets/images/imgcard1.png";
 import imgreviewcard1 from "../assets/images/reviewCard5.png";
 import CardBooks from "../components/CardBooks";
+import { useNavigate } from "react-router-dom";
 export default function BooksPage() {
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(null);
   const [SearchValue, setSearchValue] = useState("");
   const [category] = useState([
@@ -66,6 +68,12 @@ export default function BooksPage() {
     setView(final);
   }, [SearchValue, category]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
   return (
     <>
       <HeroSectionBooks />
@@ -228,7 +236,9 @@ export default function BooksPage() {
             </div>
 
             <div className="join flex justify-center gap-3 py-8">
-              <button className="join-item btn btn-active bg-move text-white border-move">1</button>
+              <button className="join-item btn btn-active bg-move text-white border-move">
+                1
+              </button>
               <button className="join-item btn bg-white text-black">2</button>
               <button className="join-item btn bg-white text-black">3</button>
               <button className="join-item btn bg-white text-black">4</button>
