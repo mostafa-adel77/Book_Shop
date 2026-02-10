@@ -53,9 +53,9 @@ export default function BooksPage() {
       img: imgcard1,
       documentId: "book-1",
       name: "Rich Dad And Poor Dad",
-      desc:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et ultricies est. Aliquam in justo varius, sagittis neque ut,",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et ultricies est. Aliquam in justo varius, sagittis neque ut,",
       author: "Robert T. Kiyosaki",
-      asin:"B09TWSRMCB",
+      asin: "B09TWSRMCB",
       imgreview: imgreviewcard1,
       year: 1997,
       price: 40,
@@ -67,9 +67,9 @@ export default function BooksPage() {
       img: imgcard2,
       documentId: "book-2",
       name: "Book Two",
-      desc:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et ultricies est. Aliquam in justo varius, sagittis neque ut,",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et ultricies est. Aliquam in justo varius, sagittis neque ut,",
       author: "Author Two",
-      asin:"B09TWSRMC2",
+      asin: "B09TWSRMC2",
       imgreview: imgreviewcard1,
       year: 2020,
       price: 50,
@@ -81,9 +81,9 @@ export default function BooksPage() {
       img: imgcard3,
       documentId: "book-3",
       name: "Book Three",
-      desc:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et ultricies est. Aliquam in justo varius, sagittis neque ut,",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et ultricies est. Aliquam in justo varius, sagittis neque ut,",
       author: "Author Three",
-      asin:"B09TWSRMC3",
+      asin: "B09TWSRMC3",
       imgreview: imgreviewcard1,
       year: 2021,
       price: 35,
@@ -93,7 +93,6 @@ export default function BooksPage() {
     },
   ]);
 
-  const [view, setView] = useState(category);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedPublisher, setSelectedPublisher] = useState([]);
   const [selectedYear, setSelectedYear] = useState([]);
@@ -107,37 +106,45 @@ export default function BooksPage() {
 
   const handleCategoryChange = (name) => {
     setSelectedCategory((prev) =>
-      prev.includes(name) ? prev.filter((el) => el !== name) : [...prev, name]
+      prev.includes(name) ? prev.filter((el) => el !== name) : [...prev, name],
     );
     setCurrentPage(1);
   };
 
   const handlePublisherChange = (name) => {
     setSelectedPublisher((prev) =>
-      prev.includes(name) ? prev.filter((el) => el !== name) : [...prev, name]
+      prev.includes(name) ? prev.filter((el) => el !== name) : [...prev, name],
     );
     setCurrentPage(1);
   };
 
   const handleYearChange = (year) => {
     setSelectedYear((prev) =>
-      prev.includes(year) ? prev.filter((el) => el !== year) : [...prev, year]
+      prev.includes(year) ? prev.filter((el) => el !== year) : [...prev, year],
     );
     setCurrentPage(1);
   };
 
   const filteredProducts = products.filter((el) => {
-    return (
-      (selectedCategory.length === 0 || selectedCategory.includes(el.category)) &&
-      (selectedPublisher.length === 0 || selectedPublisher.includes(el.publisher)) &&
-      (selectedYear.length === 0 || selectedYear.includes(el.year))
-    );
+    const matchesFilter =
+      (selectedCategory.length === 0 ||
+        selectedCategory.includes(el.category)) &&
+      (selectedPublisher.length === 0 ||
+        selectedPublisher.includes(el.publisher)) &&
+      (selectedYear.length === 0 || selectedYear.includes(el.year));
+
+    const matchesSearch =
+      SearchValue === "" ||
+      el.name.toLowerCase().includes(SearchValue.toLowerCase()) ||
+      el.author.toLowerCase().includes(SearchValue.toLowerCase());
+
+    return matchesFilter && matchesSearch;
   });
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const displayedProducts = filteredProducts.slice(
     (currentPage - 1) * productsPerPage,
-    currentPage * productsPerPage
+    currentPage * productsPerPage,
   );
 
   return (
@@ -163,7 +170,10 @@ export default function BooksPage() {
                   </summary>
                   <div className="collapse-content text-sm flex flex-col gap-4">
                     {category.map((el, index) => (
-                      <label key={index} className="flex items-center gap-3 cursor-pointer">
+                      <label
+                        key={index}
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
                         <input
                           type="checkbox"
                           className="w-4 h-4"
@@ -186,7 +196,10 @@ export default function BooksPage() {
                   </summary>
                   <div className="collapse-content text-sm flex flex-col gap-4">
                     {publisher.map((el, index) => (
-                      <label key={index} className="flex items-center gap-3 cursor-pointer">
+                      <label
+                        key={index}
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
                         <input
                           type="checkbox"
                           className="w-4 h-4"
@@ -209,7 +222,10 @@ export default function BooksPage() {
                   </summary>
                   <div className="collapse-content text-sm flex flex-col gap-4">
                     {year.map((el, index) => (
-                      <label key={index} className="flex items-center gap-3 cursor-pointer">
+                      <label
+                        key={index}
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
                         <input
                           type="checkbox"
                           className="w-4 h-4"
@@ -236,8 +252,12 @@ export default function BooksPage() {
                   onChange={(e) => setSearchValue(e.target.value)}
                   className="flex-1 px-5 text-gray-700 outline-none h-full"
                 />
-                <button className="px-4 text-gray-500"><FaMicrophone /></button>
-                <button className="px-6 h-full text-move border-l-2 border-move"><FaSearch /></button>
+                <button className="px-4 text-gray-500">
+                  <FaMicrophone />
+                </button>
+                <button className="px-6 h-full text-move border-l-2 border-move">
+                  <FaSearch />
+                </button>
               </div>
 
               <div className="w-full md:w-1/3 relative">
@@ -247,10 +267,18 @@ export default function BooksPage() {
                     <IoMdArrowDropdown className="text-black text-2xl" />
                   </summary>
                   <div className="absolute top-full left-0 mt-2 w-full bg-white rounded-2xl shadow-lg z-50 flex flex-col gap-3 px-5 py-4 text-sm font-semibold text-[#22222280]">
-                    <h1 className="cursor-pointer hover:text-black">Price: Low to High</h1>
-                    <h1 className="cursor-pointer hover:text-black">Price: High to Low</h1>
-                    <h1 className="cursor-pointer hover:text-black">Publication Date</h1>
-                    <h1 className="cursor-pointer hover:text-black">Best Seller</h1>
+                    <h1 className="cursor-pointer hover:text-black">
+                      Price: Low to High
+                    </h1>
+                    <h1 className="cursor-pointer hover:text-black">
+                      Price: High to Low
+                    </h1>
+                    <h1 className="cursor-pointer hover:text-black">
+                      Publication Date
+                    </h1>
+                    <h1 className="cursor-pointer hover:text-black">
+                      Best Seller
+                    </h1>
                   </div>
                 </details>
               </div>
@@ -287,7 +315,9 @@ export default function BooksPage() {
                   key={i}
                   onClick={() => setCurrentPage(i + 1)}
                   className={`join-item btn ${
-                    currentPage === i + 1 ? "btn-active bg-move text-white border-move" : "bg-white text-black"
+                    currentPage === i + 1
+                      ? "btn-active bg-move text-white border-move"
+                      : "bg-white text-black"
                   }`}
                 >
                   {i + 1}
