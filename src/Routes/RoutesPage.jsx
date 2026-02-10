@@ -12,6 +12,7 @@ import ResetPassword from "../pages/ResetPassword";
 import AddCodePage from "../pages/AddCodePage";
 import ProfilePage from "../pages/ProfilePage";
 import ProductDetails from "../components/ProductDetails";
+import CheckoutPage from "../pages/CheckoutPage";
 
 export default function RoutesPage() {
   return (
@@ -29,6 +30,7 @@ export default function RoutesPage() {
           <Route path="addcode" element={<AddCodePage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
           <Route path="wishlist" element={<WishlistPage />} />
         </Route>
       </Routes>

@@ -1,11 +1,18 @@
 import { FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../store";
 
 export default function CardBooks({ el }) {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   return (
     <div className="w-full flex flex-col md:flex-row rounded-2xl shadow-md p-5 gap-6">
-      <img src={el.img} onClick={()=>navigate("/productdetails")} alt="" className="w-full md:w-43.5 object-cover cursor-pointer" />
+      <img
+        src={el.img}
+        onClick={() => navigate("/productdetails")}
+        alt=""
+        className="w-full md:w-43.5 object-cover cursor-pointer"
+      />
 
       <div className="flex flex-col md:flex-row gap-5 justify-between">
         <div className="flex flex-col gap-4 w-full  md:max-w-[50%]">
@@ -35,7 +42,7 @@ export default function CardBooks({ el }) {
 
             <div className="flex flex-col xl:flex-row gap-3">
               <button
-                onClick={() => navigate("/cart")}
+                onClick={() => addToCart(el)}
                 className="bg-move text-white px-6 py-3 flex justify-center items-center gap-2 rounded-2xl hover:cursor-pointer"
               >
                 Add To Cart
@@ -55,3 +62,4 @@ export default function CardBooks({ el }) {
     </div>
   );
 }
+

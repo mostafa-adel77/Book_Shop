@@ -4,9 +4,11 @@ import { FaBars, FaRegHeart } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import johnImg from "../assets/images/johnImage2.jpg";
 import Navbar from "./Navbar";
+import { useCart } from "../store";
 
 export default function Header({ userData }) {
   const navigate = useNavigate();
+  const { items } = useCart();
   const [BarsOpen, setBarsOpen] = useState(false);
   const token = localStorage.getItem("token");
   return (
@@ -20,10 +22,17 @@ export default function Header({ userData }) {
                 onClick={() => navigate("/wishlist")}
                 className="text-white text-3xl hover:cursor-pointer"
               />
-              <FaCartShopping
-                onClick={() => navigate("/cart")}
-                className="text-white text-3xl hover:cursor-pointer"
-              />
+              <button className="relative">
+                <FaCartShopping
+                  onClick={() => navigate("/cart")}
+                  className="text-3xl text-white cursor-pointer"
+                />
+                {items.length != 0 && (
+                  <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-xs font-bold text-move bg-white rounded-full">
+                    {items.length}
+                  </span>
+                )}
+              </button>
             </div>
 
             <div className="flex items-center gap-2">
@@ -80,10 +89,17 @@ export default function Header({ userData }) {
                 onClick={() => navigate("/wishlist")}
                 className="text-white text-3xl"
               />
-              <FaCartShopping
-                onClick={() => navigate("/cart")}
-                className="text-white text-3xl"
-              />
+              <button className="relative">
+                <FaCartShopping
+                  onClick={() => navigate("/cart")}
+                  className="text-3xl text-white cursor-pointer"
+                />
+                {items.length != 0 && (
+                  <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-xs font-bold text-move bg-white rounded-full">
+                    {items.length}
+                  </span>
+                )}
+              </button>
             </div>
           </div>
         )}
