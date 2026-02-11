@@ -7,10 +7,10 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import { FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import { FiMinusCircle } from "react-icons/fi";
 import { LuCirclePlus } from "react-icons/lu";
-import { useNavigate } from "react-router-dom";
+import { useCart } from "../store";
 
 export default function CardProductDetails({ el }) {
-  const navigate = useNavigate();
+  const { decrementQty, incrementQty, addToCart, addToWishlist } = useCart();
   return (
     <div className="w-full flex flex-col lg:flex-row gap-6 p-2">
       <img src={el.img} className="w-full lg:w-78" alt="" />
@@ -72,14 +72,24 @@ export default function CardProductDetails({ el }) {
               <del className="text-[#22222280]">${el.price}.00</del>
             </span>
             <div className="flex flex-col md:flex-row items-center gap-6 text-move">
-              <div className="flex items-center gap-4 cursor-pointer">
-                <LuCirclePlus />
-                <h1 className="text-black">1</h1>
-                <FiMinusCircle />
+              <div className="flex justify-center items-center gap-3 text-move">
+                <FiMinusCircle
+                  onClick={() => decrementQty(el.documentId)}
+                  className="text-xl cursor-pointer"
+                />
+
+                <span className="px-3 text-black py-1 bg-gray-100 rounded-md">
+                  {el.qty}
+                </span>
+
+                <LuCirclePlus
+                  onClick={() => incrementQty(el.documentId)}
+                  className="text-xl cursor-pointer"
+                />
               </div>
               <div className="flex flex-col md:flex-row gap-3">
                 <button
-                  onClick={() => navigate("/cart")}
+                  onClick={() => addToCart(el)}
                   className="bg-move text-white px-6 py-3 flex justify-center items-center gap-2 rounded-2xl hover:cursor-pointer"
                 >
                   Add To Cart
@@ -87,7 +97,7 @@ export default function CardProductDetails({ el }) {
                 </button>
 
                 <button
-                  onClick={() => navigate("/wishlist")}
+                  onClick={() => addToWishlist(el)}
                   className="border-2 border-move p-3 rounded-xl flex justify-center hover:cursor-pointer"
                 >
                   <FaRegHeart className="text-2xl text-move" />

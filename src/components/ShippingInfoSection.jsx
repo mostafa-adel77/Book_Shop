@@ -27,7 +27,7 @@ export default function ShippingInfoSection() {
       .required("Address is required"),
   });
   return (
-    <div className="w-190 rounded-lg border border-[#22222233] bg-white p-10 text-black">
+    <div className="w-full lg:w-190 rounded-lg border border-[#22222233] bg-white p-10 text-black">
       <div className="flex flex-col gap-10">
         <h1 className="text-xl font-bold">Shipping information</h1>
         <Formik

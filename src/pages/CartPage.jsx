@@ -38,9 +38,15 @@ export default function CartPage() {
 
             {/* Items */}
             <div className="flex flex-col gap-4 min-w-187.5 bg-white rounded-xl p-3">
-              {items.map((el) => (
-                <CartItem key={el.documentId} product={el} />
-              ))}
+              {items.length === 0 ? (
+                <h1 className="text-center py-10 text-gray-400">
+                  Your Cart Is Empty 💔
+                </h1>
+              ) : (
+                items.map((el) => (
+                  <CartItem key={el.documentId} product={el} />
+                ))
+              )}
             </div>
             <div className="w-full bg-gray-400 h-1 min-w-187.5"></div>
           </div>

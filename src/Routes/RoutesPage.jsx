@@ -3,7 +3,6 @@ import MainLayout from "../Layouts/MainLayout";
 import HomePage from "../pages/HomePage";
 import BooksPage from "../pages/BooksPage";
 import AboutUsPage from "../pages/AboutUsPage";
-import WishlistPage from "../pages/wishlistPage";
 import CartPage from "../pages/CartPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -13,6 +12,8 @@ import AddCodePage from "../pages/AddCodePage";
 import ProfilePage from "../pages/ProfilePage";
 import ProductDetails from "../components/ProductDetails";
 import CheckoutPage from "../pages/CheckoutPage";
+import PageNotFound from "../pages/PageNotFound";
+import WishlistPage from "../pages/WishlistPage";
 
 export default function RoutesPage() {
   return (
@@ -21,7 +22,7 @@ export default function RoutesPage() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="books" element={<BooksPage />} />
-          <Route path="productdetails" element={<ProductDetails />} />
+          <Route path="/productdetails/:id" element={<ProductDetails />} />
           <Route path="aboutus" element={<AboutUsPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
@@ -33,6 +34,7 @@ export default function RoutesPage() {
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="wishlist" element={<WishlistPage />} />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );

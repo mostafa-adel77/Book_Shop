@@ -7,7 +7,7 @@ export default function CheckoutPage() {
     <>
       <HeroSectionBooks />
       <section className="flex justify-center bg-creamy py-15">
-        <div className="container flex flex-col lg:flex-row justify-between gap-10">
+        <div className="container flex flex-col xl:flex-row p-4 justify-between gap-10">
         <ShippingInformation />
         <OrderSummary />
         </div>

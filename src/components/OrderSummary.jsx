@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import imgcard1 from "../assets/images/imgcard1.png";
 import { LiaShippingFastSolid } from "react-icons/lia";
 
 import { BiSolidDiscount } from "react-icons/bi";
@@ -8,16 +7,6 @@ import { useCart } from "../store";
 import toast from "react-hot-toast";
 
 export default function OrderSummary() {
-  const [products, setProducts] = useState([
-    {
-      img: `${imgcard1}`,
-      documentId: "book-1",
-      name: "Rich Dad And Poor Dad",
-      price: 40,
-      author: "Robert T. Kiyosaki",
-    },
-  ]);
-
   const [total, setTotal] = useState(0);
   let tax = 0;
   const { items } = useCart();
@@ -32,30 +21,36 @@ export default function OrderSummary() {
 
   return (
     <>
-      <section className="w-134 rounded-lg border border-[#22222233] bg-white p-10 text-black flex flex-col justify-between gap-10">
-        <div className=" flex flex-col gap-5">
-          <h1 className="text-xl font-bold">Order summary</h1>
-          <div className="flex gap-5">
-            <img className="w-27.75 h-40" src={products[0].img} alt="" />
+      <section className="w-full lg:w-134 rounded-lg border border-[#22222233] bg-white p-10 text-black flex flex-col justify-between gap-10">
+        <h1 className="text-xl font-bold">Order summary</h1>
+        {items.map((item) => (
+          <div key={item.documentId} className=" flex flex-col gap-5">
+            <div className="flex gap-5">
+              <img className="w-27.75 h-40" src={item.img} alt="" />
 
-            <div className="w-full flex flex-col gap-4">
-              <h1 className="font-bold text-black">{products[0].name}</h1>
+              <div className="w-full flex flex-col gap-4">
+                <h1 className="font-bold text-black">{item.name}</h1>
 
-              <span className="text-sm text-gray-400">
-                Author:
-                <span className="text-black ml-1">{products[0].author}</span>
-              </span>
-              <span className="w-34.5 text-[14px] font-normal rounded-xl p-2 flex items-center justify-center gap-2 border border-[#22222280] text-[#22222280]">
-                <LiaShippingFastSolid className="text-[20px]" />
-                <h1>Free Shipping</h1>
-              </span>
+                <span className="text-sm text-gray-400">
+                  Author:
+                  <span className="text-black ml-1">{item.author}</span>
+                </span>
+                <span className="w-34.5 text-[14px] font-normal rounded-xl p-2 flex items-center justify-center gap-2 border border-[#22222280] text-[#22222280]">
+                  <LiaShippingFastSolid className="text-[20px]" />
+                  <h1>Free Shipping</h1>
+                </span>
+                <div className="flex items-center justify-between text-black text-[12px] font-bold ">
+                <span className="text-[#22222293]">
+                  {item.name} * {item.qty}
+                </span>
+                <span className="text-2xl">${item.qty * item.price}</span>
 
-              <span className="flex gap-3 text-black text-2xl font-bold ">
-                <h1>${products[0].price}</h1>
-              </span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
+
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-8">
             <h1 className="text-[#22222280]">Have a discount code?</h1>

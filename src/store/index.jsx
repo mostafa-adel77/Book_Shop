@@ -5,6 +5,7 @@ export const domain = "https://bookstore.eraasoft.pro/api";
 
 export const useCart = create((set) => ({
   items: [],
+  wishlist: [],
 
   addToCart: (newProduct) =>
     set((state) => {
@@ -57,4 +58,80 @@ export const useCart = create((set) => ({
     }),
 
   clearCart: () => set({ items: [] }),
+
+  addToWishlist: (product) =>
+    set((state) => {
+      const wishlist = [...state.wishlist];
+
+      const index = wishlist.findIndex(
+        (el) => el.documentId === product.documentId,
+      );
+
+      if (index === -1) {
+        wishlist.push({ ...product, qty: 1 });
+        toast.success("Added To Wishlist");
+      } else {
+        wishlist[index] = {
+          ...wishlist[index],
+          qty: wishlist[index].qty + 1,
+        };
+        toast.success(`Wishlist Quantity Changed To : ${wishlist[index].qty}`);
+      }
+
+      return { wishlist };
+    }),
+
+  incrementWishlistQty: (documentId) =>
+    set((state) => {
+      const wishlist = [...state.wishlist];
+      const index = wishlist.findIndex((el) => el.documentId === documentId);
+
+      wishlist[index].qty += 1;
+
+      return { wishlist };
+    }),
+
+  decrementWishlistQty: (documentId) =>
+    set((state) => {
+      const wishlist = [...state.wishlist];
+      const index = wishlist.findIndex((el) => el.documentId === documentId);
+
+      if (wishlist[index].qty > 1) {
+        wishlist[index].qty -= 1;
+      } else {
+        wishlist.splice(index, 1);
+        toast.success("Removed From Wishlist");
+      }
+
+      return { wishlist };
+    }),
+
+  moveToCart: (product) =>
+    set((state) => {
+      const cart = [...state.items];
+      const wishlist = state.wishlist.filter(
+        (el) => el.documentId !== product.documentId,
+      );
+
+      const index = cart.findIndex(
+        (el) => el.documentId === product.documentId,
+      );
+
+      if (index === -1) {
+        cart.push({ ...product });
+      } else {
+        cart[index].qty += product.qty;
+      }
+
+      toast.success("Moved To Cart");
+      return {
+        items: cart,
+        wishlist,
+      };
+    }),
+
+  removeFromWishlist: (documentId) =>
+    set((state) => ({
+      wishlist: state.wishlist.filter((el) => el.documentId !== documentId),
+    })),
 }));

@@ -5,11 +5,12 @@ import { useCart } from "../store";
 export default function CardBooks({ el }) {
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { addToWishlist } = useCart();
   return (
     <div className="w-full flex flex-col md:flex-row rounded-2xl shadow-md p-5 gap-6">
       <img
         src={el.img}
-        onClick={() => navigate("/productdetails")}
+        onClick={() => navigate(`/productdetails/${el.documentId}`)}
         alt=""
         className="w-full md:w-43.5 object-cover cursor-pointer"
       />
@@ -50,7 +51,7 @@ export default function CardBooks({ el }) {
               </button>
 
               <button
-                onClick={() => navigate("/wishlist")}
+                onClick={() => addToWishlist(el)}
                 className="border-2 border-move p-3 rounded-xl flex justify-center hover:cursor-pointer"
               >
                 <FaRegHeart className="text-2xl text-move" />
@@ -62,4 +63,3 @@ export default function CardBooks({ el }) {
     </div>
   );
 }
-

@@ -18,9 +18,9 @@ export default function ShippingInformation() {
         <ShippingInfoSection />
 
         {/* Payment Method */}
-        <div className="w-190 rounded-lg border border-[#22222233] bg-white p-10 text-black">
+        <div className="w-full lg:w-190 rounded-lg border border-[#22222233] bg-white p-10 text-black">
           <h1 className="text-xl font-bold mb-6">Payment Method</h1>
-          <div className="flex gap-5">
+          <div className="flex flex-col md:flex-row gap-5">
             {methods.map((method) => (
               <div
                 key={method.id}
@@ -43,7 +43,7 @@ export default function ShippingInformation() {
           </div>
         </div>
         {/* Note */}
-        <div className="w-190 rounded-lg border border-[#22222233] bg-white p-10 text-black flex flex-col gap-10">
+        <div className="w-full lg:w-190 rounded-lg border border-[#22222233] bg-white p-10 text-black flex flex-col gap-10">
           <h1 className="text-sm font-semibold">Note</h1>
           <div className="relative">
             <FiEdit className="absolute top-4 left-3 text-gray-400" />

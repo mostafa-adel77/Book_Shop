@@ -8,7 +8,7 @@ import { useCart } from "../store";
 
 export default function Header({ userData }) {
   const navigate = useNavigate();
-  const { items } = useCart();
+  const { items , wishlist } = useCart();
   const [BarsOpen, setBarsOpen] = useState(false);
   const token = localStorage.getItem("token");
   return (
@@ -18,17 +18,24 @@ export default function Header({ userData }) {
         {token ? (
           <div className="flex gap-8 items-center">
             <div className="hidden md:flex gap-8 items-center">
-              <FaRegHeart
-                onClick={() => navigate("/wishlist")}
-                className="text-white text-3xl hover:cursor-pointer"
-              />
+              <button className="relative">
+                <FaRegHeart
+                  onClick={() => navigate("/wishlist")}
+                  className="text-3xl text-white cursor-pointer"
+                />
+                {wishlist.length != 0 && (
+                  <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-xs font-bold text-white bg-move rounded-full">
+                    {wishlist.length}
+                  </span>
+                )}
+              </button>
               <button className="relative">
                 <FaCartShopping
                   onClick={() => navigate("/cart")}
                   className="text-3xl text-white cursor-pointer"
                 />
                 {items.length != 0 && (
-                  <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-xs font-bold text-move bg-white rounded-full">
+                  <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-xs font-bold text-white bg-move rounded-full">
                     {items.length}
                   </span>
                 )}
@@ -85,17 +92,25 @@ export default function Header({ userData }) {
               About Us
             </Link>
             <div className="flex gap-8 items-center">
-              <FaRegHeart
-                onClick={() => navigate("/wishlist")}
-                className="text-white text-3xl"
-              />
+
+              <button className="relative">
+                <FaRegHeart
+                  onClick={() => navigate("/wishlist")}
+                  className="text-3xl text-white cursor-pointer"
+                />
+                {wishlist.length != 0 && (
+                  <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-xs font-bold text-white bg-move rounded-full">
+                    {wishlist.length}
+                  </span>
+                )}
+              </button>
               <button className="relative">
                 <FaCartShopping
                   onClick={() => navigate("/cart")}
                   className="text-3xl text-white cursor-pointer"
                 />
                 {items.length != 0 && (
-                  <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-xs font-bold text-move bg-white rounded-full">
+                  <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-xs font-bold text-white bg-move rounded-full">
                     {items.length}
                   </span>
                 )}
