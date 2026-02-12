@@ -3,10 +3,12 @@ import CartItem from "../components/CartItem";
 import HeroSectionBooks from "../components/HeroSectionBooks";
 import { useCart } from "../store";
 import { BiSolidDiscount } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function CartPage() {
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate();
   let tax = 0;
   const { items } = useCart();
   useEffect(() => {
@@ -43,9 +45,7 @@ export default function CartPage() {
                   Your Cart Is Empty 💔
                 </h1>
               ) : (
-                items.map((el) => (
-                  <CartItem key={el.documentId} product={el} />
-                ))
+                items.map((el) => <CartItem key={el.documentId} product={el} />)
               )}
             </div>
             <div className="w-full bg-gray-400 h-1 min-w-187.5"></div>
@@ -96,9 +96,19 @@ export default function CartPage() {
               <h1 className="text-[#22222280] font-normal">Total</h1>
               <h1 className="text-xl text-move font-bold">${total + tax}</h1>
             </div>
-            <Link to="/checkout" className="w-full text-center bg-move text-lg font-semibold rounded-lg text-white p-2 cursor-pointer">
-              Check out
-            </Link>
+            <button
+              className="w-full text-center bg-move text-lg font-semibold rounded-lg text-white p-2 cursor-pointer"
+              onClick={() => {
+                if(items.length === 0){
+                  toast.error("The cart Is Empty🤦💔")
+                  navigate("/books")
+                }else{
+                  navigate("/checkout")
+                }
+              }}
+            >
+              Check Out
+            </button>
             <button className="w-full text-center bg-[#e2e1e4] text-lg border border-move font-semibold rounded-lg text-move p-2 cursor-pointer">
               Keep Shopping
             </button>

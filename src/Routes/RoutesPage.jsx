@@ -14,6 +14,7 @@ import ProductDetails from "../components/ProductDetails";
 import CheckoutPage from "../pages/CheckoutPage";
 import PageNotFound from "../pages/PageNotFound";
 import WishlistPage from "../pages/WishlistPage";
+import ConfirmOrder from "../pages/ConfirmOrder";
 
 export default function RoutesPage() {
   return (
@@ -33,6 +34,7 @@ export default function RoutesPage() {
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="wishlist" element={<WishlistPage />} />
+          <Route path="confirmorder" element={<ConfirmOrder />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

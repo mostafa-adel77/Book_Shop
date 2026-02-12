@@ -40,11 +40,10 @@ export default function OrderSummary() {
                   <h1>Free Shipping</h1>
                 </span>
                 <div className="flex items-center justify-between text-black text-[12px] font-bold ">
-                <span className="text-[#22222293]">
-                  {item.name} * {item.qty}
-                </span>
-                <span className="text-2xl">${item.qty * item.price}</span>
-
+                  <span className="text-[#22222293]">
+                    {item.name} * {item.qty}
+                  </span>
+                  <span className="text-2xl">${item.qty * item.price}</span>
                 </div>
               </div>
             </div>
@@ -86,8 +85,10 @@ export default function OrderSummary() {
               <h1 className="text-xl text-move font-bold">${total + tax}</h1>
             </div>
             <Link
-              to="/"
-              onClick={() => toast.success("Order Successfully!!!💯⭐")}
+              to="/confirmorder"
+              onClick={() => {
+                toast.success("Order Successfully!!!💯⭐");
+              }}
               className="w-full text-center bg-move text-lg font-semibold rounded-lg text-white p-2 cursor-pointer"
             >
               Confirm order

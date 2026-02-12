@@ -1,14 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
+import { IoIosArrowDown, IoMdTime } from "react-icons/io";
 import { useState } from "react";
 import { FaBars, FaRegHeart } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
+import { IoLocationOutline } from "react-icons/io5";
 import johnImg from "../assets/images/johnImage2.jpg";
 import Navbar from "./Navbar";
+import { MdLogout, MdOutlineHelpOutline } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import { useCart } from "../store";
+import toast from "react-hot-toast";
 
 export default function Header({ userData }) {
   const navigate = useNavigate();
-  const { items , wishlist } = useCart();
+  const { items, wishlist } = useCart();
   const [BarsOpen, setBarsOpen] = useState(false);
   const token = localStorage.getItem("token");
   return (
@@ -43,6 +48,60 @@ export default function Header({ userData }) {
             </div>
 
             <div className="flex items-center gap-2">
+              <div className="hidden md:flex dropdown dropdown-bottom dropdown-center">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost border-none hover:bg-transparent p-0 min-h-0 h-auto"
+                >
+                  <IoIosArrowDown className="text-2xl text-white" />
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu flex gap-3 mt-5 bg-white text-black font-bold rounded-box z-10 w-40 p-2 shadow-md border border-gray-100"
+                >
+                  <li>
+                    <div
+                      onClick={() => navigate("/profile")}
+                      className="flex gap-4"
+                    >
+                      <CgProfile className="text-[20px]" />
+                      <h1>Profile</h1>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex gap-3">
+                      <IoMdTime className="text-[20px]" />
+                      <h1 className="text-[12px]">Order History</h1>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex gap-3">
+                      <IoLocationOutline className="text-[20px]" />
+                      <h1>Address</h1>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex gap-3">
+                      <MdOutlineHelpOutline className="text-[20px]" />
+                      <h1>Help</h1>
+                    </div>
+                  </li>
+                  <li>
+                    <div
+                      onClick={() => {
+                        localStorage.clear();
+                        toast.success("Log Out Successfully 💯👍!!");
+                        navigate("/login");
+                      }}
+                      className="flex gap-3"
+                    >
+                      <MdLogout className="text-[20px]" />
+                      <h1>Log Out</h1>
+                    </div>
+                  </li>
+                </ul>
+              </div>
               <img
                 onClick={() => navigate("/profile")}
                 className="w-10 h-10 object-cover rounded-full cursor-pointer"
@@ -92,7 +151,6 @@ export default function Header({ userData }) {
               About Us
             </Link>
             <div className="flex gap-8 items-center">
-
               <button className="relative">
                 <FaRegHeart
                   onClick={() => navigate("/wishlist")}
@@ -115,6 +173,60 @@ export default function Header({ userData }) {
                   </span>
                 )}
               </button>
+              <div className=" dropdown dropdown-bottom dropdown-center">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost border-none hover:bg-transparent p-0 min-h-0 h-auto"
+                >
+                  <IoIosArrowDown className="text-2xl text-white" />
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu flex gap-3 mt-5 bg-white text-black font-bold rounded-box z-10 w-40 p-2 shadow-md border border-gray-100"
+                >
+                  <li>
+                    <div
+                      onClick={() => navigate("/profile")}
+                      className="flex gap-4"
+                    >
+                      <CgProfile className="text-[20px]" />
+                      <h1>Profile</h1>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex gap-3">
+                      <IoMdTime className="text-[20px]" />
+                      <h1 className="text-[12px]">Order History</h1>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex gap-3">
+                      <IoLocationOutline className="text-[20px]" />
+                      <h1>Address</h1>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex gap-3">
+                      <MdOutlineHelpOutline className="text-[20px]" />
+                      <h1>Help</h1>
+                    </div>
+                  </li>
+                  <li>
+                    <div
+                      onClick={() => {
+                        localStorage.clear();
+                        toast.success("Log Out Successfully 💯👍!!");
+                        navigate("/login");
+                      }}
+                      className="flex gap-3"
+                    >
+                      <MdLogout className="text-[20px]" />
+                      <h1>Log Out</h1>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
